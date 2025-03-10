@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Level</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Level</h1>
+        <button class="level-btn" onclick="selectLevel('easy')">Easy</button>
+        <button class="level-btn" onclick="selectLevel('medium')">Medium</button>
+        <button class="level-btn" onclick="selectLevel('hard')">Hard</button>
+        
+        <!-- Home Button -->
+        <button class="home-btn" onclick="goHome()">🏠 Home</button>
+    </div>
+
+    <script>
+        function selectLevel(level) {
+            localStorage.setItem("selectedLevel", level); // Store selected level
+            window.location.href = level + ".html"; // Redirect to the appropriate level page
+        }
+
+        function goHome() {
+            window.location.href = "index.html"; // Redirects to the main menu
+        }
+    </script>
+</body>
+</html>

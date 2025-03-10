@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-bar">
+        <span>Score: <span id="score">0</span></span>
+        <span>Time: <span id="timer">60</span>s</span>
+        <span>❤️❤️❤️</span>
+    </div>
+
+    <div class="game-board" id="game-board"></div>
+
+    <!-- Home Button -->
+    <div class="home-container">
+        <button class="home-btn" onclick="goHome()">🏠 Home</button>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        function goHome() {
+            window.location.href = "index.html"; // Redirects to the main menu
+        }
+
+        // Ensure default level is set to 'easy' if not already selected
+        if (!localStorage.getItem("selectedLevel")) {
+            localStorage.setItem("selectedLevel", "easy");
+        }
+    </script>
+
+</body>
+</html>

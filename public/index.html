@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Master</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="menu-container">
+        <h1>Memory Master</h1>
+        <p class="tagline">Train your brain, have fun!</p>
+        <button class="btn purple" onclick="navigateTo('play.html')">Play Game</button>
+        <button class="btn blue" onclick="navigateTo('levels.html')">Select Level</button>
+        <button class="btn green" onclick="navigateTo('how-to-play.html')">How to Play</button>
+        <button class="btn orange" onclick="navigateTo('settings.html')">Settings</button>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+</html>
