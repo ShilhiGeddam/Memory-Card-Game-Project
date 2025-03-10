@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Settings</h1>
+
+    <!-- Theme Selection -->
+    <label for="theme">Theme:</label>
+    <select id="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="nature">Nature</option>
+    </select>
+
+    <!-- Grid Size Selection -->
+    <label for="grid-size">Grid Size:</label>
+    <select id="grid-size">
+        <option value="4x3">4x3 (Easy)</option>
+        <option value="6x4">6x4 (Hard)</option>
+    </select>
+
+    <!-- Save Changes Button -->
+    <button onclick="saveSettings()">✅ Save Changes</button>
+
+    <!-- Home Button -->
+    <button onclick="goHome()">🏠 Home</button>
+
+    <script>
+        // Function to save settings in localStorage
+        function saveSettings() {
+            const theme = document.getElementById("theme").value;
+            const gridSize = document.getElementById("grid-size").value;
+            
+            localStorage.setItem("selectedTheme", theme);
+            localStorage.setItem("selectedGridSize", gridSize);
+
+            applyTheme(theme);
+            alert("Settings saved successfully! ✅");
+        }
+
+        // Function to apply the saved theme
+        function applyTheme(theme) {
+            document.body.className = theme; // Change body class for styling
+        }
+
+        // Function to load saved settings
+        function loadSettings() {
+            const savedTheme = localStorage.getItem("selectedTheme") || "light";
+            const savedGridSize = localStorage.getItem("selectedGridSize") || "4x3";
+
+            document.getElementById("theme").value = savedTheme;
+            document.getElementById("grid-size").value = savedGridSize;
+
+            applyTheme(savedTheme);
+        }
+
+        // Function to go back to the home page
+        function goHome() {
+            window.location.href = "index.html";
+        }
+
+        // Load settings when the page loads
+        window.onload = loadSettings;
+    </script>
+
+</body>
+</html>
