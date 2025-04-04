@@ -4,7 +4,14 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 
 let level = localStorage.getItem("selectedLevel") || "easy"; // Get selected level or default to easy
-let cards = ["🐶", "🐱", "🐰", "🐼", "🦊", "🐸", "🐵", "🐻", "🐯", "🦁", "🐮", "🐷"];
+
+// Define cards for each level
+const cardSets = {
+    easy: ["🐶", "🐱", "🐰", "🐼", "🦊", "🐸"], // 6 pairs (animals)
+    medium: ["🍎", "🍌", "🍉", "🍓", "🍇", "🍊", "🍒", "🥝", "🍍", "🥥", "🍋", "🍐"], // 12 pairs (fruits)
+    hard: ["🚗", "✈️", "🚀", "🚁", "🚤", "🚂", "🛳️", "🚌", "🚲", "🏍️", "🚜", "🚕", "🚑", "🚒", "🚚", "🚎"] // 16 pairs (32 cards total)
+};
+
 let gameCards = [];
 let flippedCards = [];
 let matchedPairs = 0;
@@ -26,12 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
         setLevel();
         startGame();
     }
-});
+}); 
 
 // Apply level settings
 function setLevel() {
     let levelData = levelConfig[level];
-    gameCards = cards.slice(0, levelData.pairs).concat(cards.slice(0, levelData.pairs)); // Duplicate pairs
+    gameCards = cardSets[level].slice(0, levelData.pairs).concat(cardSets[level].slice(0, levelData.pairs)); // Duplicate pairs
     timeLeft = levelData.time;
     matchedPairs = 0;
     score = 0;
@@ -51,29 +58,8 @@ function shuffleCards() {
     gameCards.sort(() => Math.random() - 0.5);
 }
 
+// Create the game board
 function createBoard() {
-    console.log("Current Level:", level); // Debugging log to check the level
-
-    // Explicitly set grid layout based on level
-    if (level === "easy") {
-        gameBoard.style.display = "grid";
-        gameBoard.style.gridTemplateColumns = "repeat(4, 1fr)";
-        gameBoard.style.gridTemplateRows = "repeat(3, 1fr)";
-    } else if (level === "medium") {
-        gameBoard.style.display = "grid";
-        gameBoard.style.gridTemplateColumns = "repeat(6, 1fr)";
-        gameBoard.style.gridTemplateRows = "repeat(4, 1fr)";
-    } else if (level === "hard") {
-        gameBoard.style.display = "grid";
-        gameBoard.style.gridTemplateColumns = "repeat(8, 1fr)";
-        gameBoard.style.gridTemplateRows = "repeat(4, 1fr)"; // Should now correctly apply 8x4!
-        let level = localStorage.getItem("selectedLevel") || "easy";
-console.log("Loaded Level from Storage:", level); // Debugging log
-
-    } else {
-        console.error("Invalid level:", level);
-    }
-
     gameCards.forEach((emoji) => {
         let card = document.createElement("div");
         card.classList.add("card");
@@ -83,8 +69,6 @@ console.log("Loaded Level from Storage:", level); // Debugging log
         gameBoard.appendChild(card);
     });
 }
-
-
 
 // Start timer on first flip
 function startTimer() {
