@@ -29,10 +29,25 @@ h1 {
     border-radius: 5px;
 }
 
-.purple { background: purple; color: white; }
-.blue { background: blue; color: white; }
-.green { background: green; color: white; }
-.orange { background: orange; color: white; }
+.purple {
+    background: purple;
+    color: white;
+}
+
+.blue {
+    background: blue;
+    color: white;
+}
+
+.green {
+    background: green;
+    color: white;
+}
+
+.orange {
+    background: orange;
+    color: white;
+}
 
 .game-board {
     display: grid;
@@ -46,8 +61,10 @@ h1 {
     background: #fff;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    grid-template-columns: unset; /* Remove any existing values */
-    grid-template-rows: unset; /* Reset rows */
+    grid-template-columns: unset;
+    /* Remove any existing values */
+    grid-template-rows: unset;
+    /* Reset rows */
 }
 
 
@@ -102,6 +119,7 @@ h1 {
     height: 50px;
     font-size: 18px;
 }
+
 .home-container {
     display: flex;
     justify-content: center;
@@ -222,4 +240,30 @@ ul li {
 }
 
 
+.fact-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #343335;
+    border: 2px solid #ffc107;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: popUp 0.5s ease-in-out;
+}
 
+@keyframes popUp {
+    0% {
+        transform: translate(-50%, -40%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
