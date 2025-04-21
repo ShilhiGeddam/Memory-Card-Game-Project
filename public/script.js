@@ -221,3 +221,17 @@ function applySavedTheme() {
     const savedTheme = localStorage.getItem("selectedTheme") || "light";
     document.body.className = savedTheme;
 }
+
+// Volume Control
+const volumeSlider = document.getElementById("volume-slider");
+
+volumeSlider.addEventListener("input", () => {
+    const volume = parseFloat(volumeSlider.value);
+    matchSound.volume = volume;
+    mismatchSound.volume = volume;
+    bgMusic.volume = volume;
+});
+const initialVolume = parseFloat(volumeSlider.value);
+matchSound.volume = initialVolume;
+mismatchSound.volume = initialVolume;
+bgMusic.volume = initialVolume;
