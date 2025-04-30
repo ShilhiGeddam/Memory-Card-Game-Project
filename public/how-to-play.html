@@ -3,38 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Game</title>
+    <title>How to Play</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="volume-control">
-    🔊 Volume: <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
-    </div>
-    <div class="top-bar">
-        <span>Score: <span id="score">0</span></span>
-        <span>Time: <span id="timer">60</span>s</span>
-        <span>❤️❤️❤️</span>
-    </div>
 
-    <div class="game-board" id="game-board"></div>
-
-    <!-- Home Button -->
-    <div class="home-container">
-        <button class="home-btn" onclick="goHome()">🏠 Home</button>
-    </div>
-
-    <script src="script.js"></script>
-
-    <script>
-        function goHome() {
-            window.location.href = "index.html"; // Redirects to the main menu
-        }
-
-        // Ensure default level is set to 'easy' if not already selected
-        if (!localStorage.getItem("selectedLevel")) {
-            localStorage.setItem("selectedLevel", "easy");
-        }
-    </script>
-
+    <h1>How to Play</h1>
+    <p>Click on a card to flip it over and find its match.</p>
+    <p>Match all pairs within the time limit to win!</p>
+    <p>Scoring System:</p>
+    <ul>
+        <li>10 points for each match</li>
+        <li>5 points bonus for quick matches</li>
+        <li>50 points for completing a level</li>
+        <li>20 points for a perfect game</li>
+    </ul>
+  <!-- Home Button -->
+  <button class="home-btn" onclick="goHome()">ðŸ  Home</button>
+  <script>
+    function goHome() {
+        window.location.href = "index.html"; // Redirects to the main menu
+    }
+</script>
 </body>
 </html>
