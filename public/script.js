@@ -14,44 +14,44 @@ let level = localStorage.getItem("selectedLevel") || "easy";
 
 const cardSets = {
     easy: [
-        { pair: "🐶", hint: "D", fact: "Dogs can learn over 1000 words!" },
-        { pair: "🐱", hint: "C", fact: "Cats sleep for 70% of their lives." },
-        { pair: "🐰", hint: "R", fact: "Rabbits' teeth never stop growing." },
-        { pair: "🐼", hint: "P", fact: "Pandas eat for up to 14 hours a day." },
-        { pair: "🦊", hint: "F", fact: "Foxes use 40 different sounds to communicate." },
-        { pair: "🐸", hint: "F", fact: "Frogs absorb water through their skin." }
+        { pair: "🐶", hint: "D", name: "Dog", fact: "Dogs can learn over 1000 words!" },
+        { pair: "🐱", hint: "C", name: "Cat", fact: "Cats sleep for 70% of their lives." },
+        { pair: "🐰", hint: "R", name: "Rabbit", fact: "Rabbits' teeth never stop growing." },
+        { pair: "🐼", hint: "P", name: "Panda", fact: "Pandas eat for up to 14 hours a day." },
+        { pair: "🦊", hint: "F", name: "Fox", fact: "Foxes use 40 different sounds to communicate." },
+        { pair: "🐸", hint: "F", name: "Frog", fact: "Frogs absorb water through their skin." }
     ],
     medium: [
-        { pair: "🍎", hint: "A", fact: "Apples float because 25% of their volume is air." },
-        { pair: "🍌", hint: "B", fact: "Bananas are berries, but strawberries aren't." },
-        { pair: "🍉", hint: "W", fact: "Watermelons are 92% water." },
-        { pair: "🍓", hint: "S", fact: "Strawberries are the only fruit with seeds outside." },
-        { pair: "🍇", hint: "G", fact: "Grapes explode in the microwave!" },
-        { pair: "🍊", hint: "O", fact: "Oranges are a hybrid of pomelo and mandarin." },
-        { pair: "🍒", hint: "C", fact: "Cherries contain melatonin that helps sleep." },
-        { pair: "🥝", hint: "K", fact: "Kiwis contain more vitamin C than oranges." },
-        { pair: "🍍", hint: "P", fact: "Pineapples regenerate!" },
-        { pair: "🥥", hint: "C", fact: "Coconuts kill more people than sharks each year." },
-        { pair: "🍋", hint: "L", fact: "Lemons can power light bulbs." },
-        { pair: "🍐", hint: "P", fact: "Pears are related to apples and roses." }
+        { pair: "🍎", hint: "A", name: "Apple", fact: "Apples float because 25% of their volume is air." },
+        { pair: "🍌", hint: "B", name: "Banana", fact: "Bananas are berries, but strawberries aren't." },
+        { pair: "🍉", hint: "W", name: "Watermelon", fact: "Watermelons are 92% water." },
+        { pair: "🍓", hint: "S", name: "Strawberry", fact: "Strawberries are the only fruit with seeds outside." },
+        { pair: "🍇", hint: "G", name: "Grapes", fact: "Grapes explode in the microwave!" },
+        { pair: "🍊", hint: "O", name: "Orange", fact: "Oranges are a hybrid of pomelo and mandarin." },
+        { pair: "🍒", hint: "C", name: "Cherry", fact: "Cherries contain melatonin that helps sleep." },
+        { pair: "🥝", hint: "K", name: "Kiwi", fact: "Kiwis contain more vitamin C than oranges." },
+        { pair: "🍍", hint: "P", name: "Pineapple", fact: "Pineapples regenerate!" },
+        { pair: "🥥", hint: "C", name: "Coconut", fact: "Coconuts kill more people than sharks each year." },
+        { pair: "🍋", hint: "L", name: "Lemon", fact: "Lemons can power light bulbs." },
+        { pair: "🍐", hint: "P", name: "Pear", fact: "Pears are related to apples and roses." }
     ],
     hard: [
-        { pair: "🚗", hint: "C", fact: "Cars were invented in 1886." },
-        { pair: "✈️", hint: "P", fact: "Planes fly at about 35,000 feet." },
-        { pair: "🚀", hint: "R", fact: "Rockets can exceed speeds of 25,000 mph!" },
-        { pair: "🚁", hint: "H", fact: "Helicopters can hover in one place." },
-        { pair: "🚤", hint: "S", fact: "Speedboats can reach 100 mph." },
-        { pair: "🚂", hint: "T", fact: "Trains can run on electricity or steam." },
-        { pair: "🛳️", hint: "S", fact: "Cruise ships can carry 6000+ passengers." },
-        { pair: "🚌", hint: "B", fact: "Some buses can carry over 120 people." },
-        { pair: "🚲", hint: "B", fact: "Bicycles were invented in the 19th century." },
-        { pair: "🏍️", hint: "M", fact: "Motorcycles can be faster than cars." },
-        { pair: "🚜", hint: "T", fact: "Tractors help with farming tasks." },
-        { pair: "🚕", hint: "T", fact: "Taxis first appeared in the 1600s (as horse carriages)." },
-        { pair: "🚑", hint: "A", fact: "Ambulances often have mirrored writing on front." },
-        { pair: "🚒", hint: "F", fact: "Fire trucks carry hundreds of gallons of water." },
-        { pair: "🚚", hint: "T", fact: "Trucks move over 70% of goods in the U.S." },
-        { pair: "🚎", hint: "E", fact: "Electric buses produce no emissions." }
+        { pair: "🚗", hint: "C", name: "Car", fact: "Cars were invented in 1886." },
+        { pair: "✈️", hint: "P", name: "Plane", fact: "Planes fly at about 35,000 feet." },
+        { pair: "🚀", hint: "R", name: "Rocket", fact: "Rockets can exceed speeds of 25,000 mph!" },
+        { pair: "🚁", hint: "H", name: "Helicopter", fact: "Helicopters can hover in one place." },
+        { pair: "🚤", hint: "S", name: "Speedboat", fact: "Speedboats can reach 100 mph." },
+        { pair: "🚂", hint: "T", name: "Train", fact: "Trains can run on electricity or steam." },
+        { pair: "🛳️", hint: "S", name: "Ship", fact: "Cruise ships can carry 6000+ passengers." },
+        { pair: "🚌", hint: "B", name: "Bus", fact: "Some buses can carry over 120 people." },
+        { pair: "🚲", hint: "B", name: "Bicycle", fact: "Bicycles were invented in the 19th century." },
+        { pair: "🏍️", hint: "M", name: "Motorcycle", fact: "Motorcycles can be faster than cars." },
+        { pair: "🚜", hint: "T", name: "Tractor", fact: "Tractors help with farming tasks." },
+        { pair: "🚕", hint: "T", name: "Taxi", fact: "Taxis first appeared in the 1600s (as horse carriages)." },
+        { pair: "🚑", hint: "A", name: "Ambulance", fact: "Ambulances often have mirrored writing on front." },
+        { pair: "🚒", hint: "F", name: "Fire Truck", fact: "Fire trucks carry hundreds of gallons of water." },
+        { pair: "🚚", hint: "T", name: "Truck", fact: "Trucks move over 70% of goods in the U.S." },
+        { pair: "🚎", hint: "E", name: "Electric Bus", fact: "Electric buses produce no emissions." }
     ]
 };
 
@@ -91,8 +91,8 @@ function setLevel() {
     gameCards = [];
 
     baseCards.forEach(card => {
-        gameCards.push({ type: "emoji", value: card.pair, fact: card.fact });
-        gameCards.push({ type: "hint", value: card.hint, pair: card.pair, fact: card.fact });
+        gameCards.push({ type: "emoji", value: card.pair, fact: card.fact, name: card.name });
+        gameCards.push({ type: "hint", value: card.hint, pair: card.pair, fact: card.fact, name: card.name });
     });
 
     timeLeft = levelData.time;
@@ -114,15 +114,32 @@ function shuffleCards() {
 
 function createBoard() {
     gameCards.forEach((cardData) => {
+        // Create card container
+        const cardContainer = document.createElement("div");
+        cardContainer.classList.add("card-container");
+
+        // The actual card
         const card = document.createElement("div");
         card.classList.add("card");
         card.dataset.value = cardData.value;
         card.dataset.type = cardData.type;
         card.dataset.pair = cardData.pair || cardData.value;
         card.dataset.fact = cardData.fact;
+        card.dataset.name = cardData.name;
         card.textContent = "?";
         card.addEventListener("click", flipCard);
-        gameBoard.appendChild(card);
+
+        // Label element for the card's name
+        const label = document.createElement("div");
+        label.classList.add("label");
+        label.textContent = ""; // Hidden until card is flipped
+
+        // Assemble container
+        cardContainer.appendChild(card);
+        cardContainer.appendChild(label);
+
+        // Add container to the board
+        gameBoard.appendChild(cardContainer);
     });
 }
 
@@ -141,6 +158,13 @@ function flipCard() {
     if (this.textContent !== "?" || flippedCards.length >= 2) return;
 
     this.textContent = this.dataset.value;
+
+    // Show name in the label underneath
+    const label = this.parentElement.querySelector(".label");
+    if (label) {
+        label.textContent = this.dataset.name;
+    }
+
     flippedCards.push(this);
     startTimer();
 
@@ -173,6 +197,11 @@ function checkMatch() {
         setTimeout(() => {
             card1.textContent = "?";
             card2.textContent = "?";
+            // Clear the labels as well
+            const label1 = card1.parentElement.querySelector(".label");
+            const label2 = card2.parentElement.querySelector(".label");
+            if (label1) label1.textContent = "";
+            if (label2) label2.textContent = "";
         }, 400);
     }
 
