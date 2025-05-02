@@ -85,6 +85,7 @@ function startBackgroundMusic() {
         console.warn("Autoplay blocked:", err);
     });
 }
+
 function setLevel() {
     let levelData = levelConfig[level];
     const baseCards = cardSets[level].slice(0, levelData.pairs);
@@ -118,27 +119,43 @@ function createBoard() {
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("card-container");
 
-        // The actual card
-        const card = document.createElement("div");
-        card.classList.add("card");
-        card.dataset.value = cardData.value;
-        card.dataset.type = cardData.type;
-        card.dataset.pair = cardData.pair || cardData.value;
-        card.dataset.fact = cardData.fact;
-        card.dataset.name = cardData.name;
-        card.textContent = "?";
-        card.addEventListener("click", flipCard);
+        // Create card inner wrapper
+        const cardInner = document.createElement("div");
+        cardInner.classList.add("card-inner");
 
-        // Label element for the card's name
-        const label = document.createElement("div");
-        label.classList.add("label");
-        label.textContent = ""; // Hidden until card is flipped
+        // Card front (with "?")
+        const cardFront = document.createElement("div");
+        cardFront.classList.add("card-front");
+        cardFront.textContent = "?";
 
-        // Assemble container
-        cardContainer.appendChild(card);
-        cardContainer.appendChild(label);
+        // Card back (with emoji or hint)
+        const cardBack = document.createElement("div");
+        cardBack.classList.add("card-back");
+        cardBack.textContent = cardData.value;
 
-        // Add container to the board
+        // Attach data to card inner
+        cardInner.dataset.value = cardData.value;
+        cardInner.dataset.type = cardData.type;
+        cardInner.dataset.pair = cardData.pair || cardData.value;
+        cardInner.dataset.fact = cardData.fact;
+        cardInner.dataset.name = cardData.name;
+
+        // Add click listener
+        cardInner.addEventListener("click", flipCard);
+
+        // Assemble card
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        cardContainer.appendChild(cardInner);
+
+        // Label for the name — only for emoji cards
+        if (cardData.type === "emoji") {
+            const label = document.createElement("div");
+            label.classList.add("label");
+            label.textContent = "";
+            cardContainer.appendChild(label);
+        }
+
         gameBoard.appendChild(cardContainer);
     });
 }
@@ -155,11 +172,10 @@ function startTimer() {
 }
 
 function flipCard() {
-    if (this.textContent !== "?" || flippedCards.length >= 2) return;
+    if (this.classList.contains("flipped") || flippedCards.length >= 2) return;
 
-    this.textContent = this.dataset.value;
+    this.classList.add("flipped");
 
-    // Show name in the label underneath
     const label = this.parentElement.querySelector(".label");
     if (label) {
         label.textContent = this.dataset.name;
@@ -184,20 +200,25 @@ function checkMatch() {
         score += 10;
         matchedPairs++;
         matchSound.play();
+
+        // Disable matched cards
         card1.style.pointerEvents = "none";
         card2.style.pointerEvents = "none";
+
+        // Show fact popup
         showFact(card1.dataset.fact);
 
+        // Check if all pairs matched
         if (matchedPairs === gameCards.length / 2) {
             completeLevel();
         }
     } else {
-        // No match
+        // No match — flip both cards back and clear labels
         mismatchSound.play();
         setTimeout(() => {
-            card1.textContent = "?";
-            card2.textContent = "?";
-            // Clear the labels as well
+            card1.classList.remove("flipped");
+            card2.classList.remove("flipped");
+
             const label1 = card1.parentElement.querySelector(".label");
             const label2 = card2.parentElement.querySelector(".label");
             if (label1) label1.textContent = "";
@@ -205,6 +226,7 @@ function checkMatch() {
         }, 400);
     }
 
+    // Reset flipped cards and update score
     flippedCards = [];
     scoreDisplay.textContent = score;
 }
@@ -223,7 +245,7 @@ function showFact(fact) {
 function completeLevel() {
     clearInterval(timerInterval);
     setTimeout(() => {
-        alert(`🎉 You completed the ${level.toUpperCase()} level!`);
+        alert(`🎉 You completed the ${level.toUpperCase()} level!\n\nYour Score: ${score} points`);
         const next = levelConfig[level].next;
         if (next) {
             localStorage.setItem("selectedLevel", next);
@@ -234,6 +256,7 @@ function completeLevel() {
         }
     }, 800);
 }
+
 
 function endGame() {
     clearInterval(timerInterval);
@@ -254,13 +277,28 @@ function applySavedTheme() {
 // Volume Control
 const volumeSlider = document.getElementById("volume-slider");
 
-volumeSlider.addEventListener("input", () => {
-    const volume = parseFloat(volumeSlider.value);
-    matchSound.volume = volume;
-    mismatchSound.volume = volume;
-    bgMusic.volume = volume;
-});
-const initialVolume = parseFloat(volumeSlider.value);
+// Load saved volume or set to default (0.5)
+const savedVolume = localStorage.getItem("gameVolume");
+const initialVolume = savedVolume !== null ? parseFloat(savedVolume) : parseFloat(volumeSlider.value);
+
+// Set initial volume to all audio elements
 matchSound.volume = initialVolume;
 mismatchSound.volume = initialVolume;
 bgMusic.volume = initialVolume;
+
+// Set slider to reflect the stored or default volume
+volumeSlider.value = initialVolume;
+
+// Update volume and save to localStorage on slider input
+volumeSlider.addEventListener("input", () => {
+    const volume = parseFloat(volumeSlider.value);
+
+    // Apply new volume to all sounds
+    matchSound.volume = volume;
+    mismatchSound.volume = volume;
+    bgMusic.volume = volume;
+
+    // Save to localStorage
+    localStorage.setItem("gameVolume", volume);
+});
+
