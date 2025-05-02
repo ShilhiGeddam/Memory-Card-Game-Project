@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <h1>Settings</h1>
@@ -22,7 +24,8 @@
     <label for="grid-size">Grid Size:</label>
     <select id="grid-size">
         <option value="4x3">4x3 (Easy)</option>
-        <option value="6x4">6x4 (Hard)</option>
+        <option value="6x4">6x4 (Meduum)</option>
+        <option value="8x4">6x4 (Hard)</option>
     </select>
 
     <!-- Save Changes Button -->
@@ -36,7 +39,7 @@
         function saveSettings() {
             const theme = document.getElementById("theme").value;
             const gridSize = document.getElementById("grid-size").value;
-            
+
             localStorage.setItem("selectedTheme", theme);
             localStorage.setItem("selectedGridSize", gridSize);
 
@@ -51,7 +54,7 @@
 
         // Function to load saved settings
         function loadSettings() {
-            const savedTheme = localStorage.getItem("selectedTheme") || "light";
+            const savedTheme = localStorage.getItem("selectedTheme") || "dark";  // Default to 'dark'
             const savedGridSize = localStorage.getItem("selectedGridSize") || "4x3";
 
             document.getElementById("theme").value = savedTheme;
@@ -70,4 +73,5 @@
     </script>
 
 </body>
+
 </html>
