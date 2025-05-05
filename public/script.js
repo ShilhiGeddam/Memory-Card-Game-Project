@@ -1,3 +1,25 @@
+let narratorVoice = null;
+
+function setNarratorVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    // Try to find a female British voice
+    narratorVoice = voices.find(voice =>
+        voice.lang === "en-GB" && voice.name.toLowerCase().includes("female")
+    ) || voices.find(voice => voice.lang === "en-GB") || voices[0]; // fallback
+}
+
+// Some browsers need a delay before voices are available
+window.speechSynthesis.onvoiceschanged = setNarratorVoice;
+
+function narrateHint(letter, name) {
+    const message = new SpeechSynthesisUtterance(`${letter} is for ${name}`);
+    message.voice = narratorVoice;
+    message.pitch = 1;
+    message.rate = 0.9;
+    message.volume = matchSound.volume;
+    window.speechSynthesis.speak(message);
+}
+setNarratorVoice();
 // Elements
 const gameBoard = document.getElementById("game-board");
 const scoreDisplay = document.getElementById("score");
@@ -179,6 +201,11 @@ function flipCard() {
     const label = this.parentElement.querySelector(".label");
     if (label) {
         label.textContent = this.dataset.name;
+    }
+
+    // 📢 Narrate hint card
+    if (this.dataset.type === "hint") {
+        narrateHint(this.dataset.value, this.dataset.name);
     }
 
     flippedCards.push(this);
